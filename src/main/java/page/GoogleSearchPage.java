@@ -1,4 +1,11 @@
 package page;
 
-public class GoogleSearchPage {
+import org.openqa.selenium.WebDriver;
+import util.BasePage;
+
+public class GoogleSearchPage extends BasePage {
+
+    public GoogleSearchPage(WebDriver driver) {
+        super(driver);
+    }
 }
