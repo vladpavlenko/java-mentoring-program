@@ -2,6 +2,7 @@ package util;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -46,13 +47,5 @@ public class BaseTest {
 
     public void openURL(String websiteURL) {
         driver.get(websiteURL);
-    }
-
-    public void enterText(String xpath, String text) {
-        driver.findElement(By.xpath(xpath)).sendKeys(text);
-    }
-
-    public void clickElement(String xpath) {
-        driver.findElement(By.xpath(xpath)).click();
     }
 }

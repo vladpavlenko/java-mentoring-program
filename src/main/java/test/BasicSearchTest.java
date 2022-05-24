@@ -11,6 +11,6 @@ public class BasicSearchTest extends BaseTest {
         GoogleSearchPage searchPage = new GoogleSearchPage(getDriver());
         getDriver().manage().window().maximize();
         openURL("https://google.com/");
-        Thread.sleep(3000);
+        searchPage.searchForElementAndClick("epam", "Epam");
     }
 }
