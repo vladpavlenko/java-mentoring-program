@@ -7,10 +7,11 @@ import util.BaseTest;
 public class BasicSearchTest extends BaseTest {
 
     @Test
-    public void shouldPerformSearch() throws InterruptedException {
+    public void shouldPerformSearch() {
         GoogleSearchPage searchPage = new GoogleSearchPage(getDriver());
         getDriver().manage().window().maximize();
         openURL("https://google.com/");
         searchPage.searchForElementAndClick("epam", "Epam");
     }
+
 }
