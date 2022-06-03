@@ -15,5 +15,4 @@ public class GoogleSearchPage extends BasePage {
         waitForElementToAppear(By.xpath("//span[text()='" + resultText + "']"));
         clickElement("//span[text()='" + resultText + "']");
     }
-
 }

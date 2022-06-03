@@ -13,5 +13,4 @@ public class BasicSearchTest extends BaseTest {
         openURL("https://google.com/");
         searchPage.searchForElementAndClick("epam", "Epam");
     }
-
 }
