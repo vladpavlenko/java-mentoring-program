@@ -1,8 +1,6 @@
 package util;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,19 +15,10 @@ public class BaseTest {
     @BeforeSuite
     public void BeforeSuite() {
         switch (chrome) {
-            case CHROME:
-            default:
-                this.driver = new ChromeDriver();
-                break;
-            case MOZILLA:
-                this.driver = new FirefoxDriver();
-                break;
-            case EDGE:
-                this.driver = new EdgeDriver();
-                break;
-            case SAFARI:
-                this.driver = new SafariDriver();
-                break;
+            case CHROME -> this.driver = new ChromeDriver();
+            case MOZILLA -> this.driver = new FirefoxDriver();
+            case EDGE -> this.driver = new EdgeDriver();
+            case SAFARI -> this.driver = new SafariDriver();
         }
     }
 
