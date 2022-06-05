@@ -19,5 +19,4 @@ public class GoogleSearchPage extends BasePage {
         driver.get(URL);
         wait.until(ExpectedConditions.visibilityOf(searchInputField));
     }
-
 }
