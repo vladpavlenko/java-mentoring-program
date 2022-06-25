@@ -4,9 +4,9 @@
         <listener class-name = "custom.CustomReport" />
     </listeners>
 
-    <test name = "Simple Reporter test">
+    <test name = "Simple Reporter tests">
         <classes>
-            <class name = "test.BasicSearchTest" />
+            <class name = "tests.BasicSearchTest" />
         </classes>
     </test>
 </suite>
