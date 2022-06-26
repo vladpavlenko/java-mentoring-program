@@ -81,9 +81,23 @@ public class SelenideTestCase extends BaseTest{
   }
 
   @Test
-  @Story("Placeholder")
-  @Description("Placeholder")
+  @Story("Order tickets on SkyUp site")
+  @Description("Order tickets on SkyUp site")
   public void skyUpTest() {
-
+    open("https://skyup.aero/uk/");
+    $(By.xpath("//*[@id='open-appeal-modal']/div/div[2]/button")).shouldBe(Condition.visible).click();
+    $(By.xpath("//button[contains(text(), 'Погодитися')]")).click();
+    $(By.id("headerTriggerDropdownPassengers")).click();
+    $(By.xpath("//*[@id='headerDropdownPassengers']/li[4]/a/span")).should(appear).click();
+    $(By.xpath("//div[contains(text(), 'Грузія')]")).should(appear).click();
+    $(By.xpath("//input[@id='arrivalCityName']//parent::div")).click();
+    $(By.xpath("//span[contains(text(), 'Афіни')]")).should(appear).click();
+    $(By.id("forwardDateItem")).click();
+    $$(By.xpath("//div[@class='day toMonth valid tooltip-trigger']")).filterBy(enabled).first().should(appear).click();
+    $(By.xpath("//button[contains(text(), 'Пошук квитків')][not(@id='searchBtn')]")).should(appear).click();
+    $(By.xpath("//div[text()='Вибрати']")).shouldBe(visible).click();
+    $(By.xpath("//*[@id='forwardEconomModal']/div/div[2]/div/div/div[1]/div[2]/button/span[1]")).should(appear).click();
+    $(By.id("progressNextBtn")).should(appear).click();
+    //I don't want to enter my personal info :)
   }
 }

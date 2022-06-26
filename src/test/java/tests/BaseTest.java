@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.impl.Waiter;
 import com.codeborne.selenide.junit.ScreenShooter;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -24,6 +25,8 @@ public class BaseTest {
 
   @Before
   public void setUp() {
+    Configuration.browser = "chrome";
+    Configuration.browserSize = "1920x1080";
     SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
   }
 }
