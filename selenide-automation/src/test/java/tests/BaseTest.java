@@ -8,6 +8,8 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.Before;
 import org.junit.Rule;
 
+import java.util.logging.Logger;
+
 public class BaseTest {
   /**
    *  Rule to take screenshots for both passed and failed tests
@@ -21,7 +23,7 @@ public class BaseTest {
    */
   private final Waiter waiter = new Waiter();
 
-  java.util.logging.Logger logger = java.util.logging.Logger.getLogger(BaseTest.class.getName());
+  Logger logger = java.util.logging.Logger.getLogger(BaseTest.class.getName());
 
   @Before
   public void setUp() {

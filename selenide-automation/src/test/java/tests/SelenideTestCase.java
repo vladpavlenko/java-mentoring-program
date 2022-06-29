@@ -8,6 +8,10 @@ import io.qameta.allure.Story;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import pages.BasePage;
+import pages.hotline.HotlineHomePage;
+import pages.rozetka.RozetkaHomePage;
+import pages.rozetka.RozetkaSearchPage;
 import steps.SearchSteps;
 
 import java.util.Random;
@@ -23,23 +27,19 @@ public class SelenideTestCase extends BaseTest{
   @Test
   @Story("Open Rozetka and search for cozy hamster blankets")
   @Description("Happy Path test of search")
-  public void rozetkaTest() {
-    logger.info("navigate to rozetka");
-    open("https://rozetka.com.ua/");
-    logger.info("perform search");
-    $(By.name("search")).setValue("плед-хомяк");
-    $(By.xpath("//button[text() = ' Найти ']")).click();
-    logger.info("validate results");
-    $(By.xpath("//span[text() = ' Все результаты ']")).should(appear);
+  public void openRozetkaHomePageAndPerformSearch() {
+    RozetkaHomePage.openURL();
+    RozetkaHomePage.performSearchAndClickResult("плед-хомяк");
+    RozetkaSearchPage.waitForResultsPageToAppear();
   }
 
   @Test
   @Story("Search Hotline for graphics card")
   @Description("Happy Path test of search")
   public void hotlineTest() {
-    open("https://hotline.ua/");
-    $(By.id("searchbox")).setValue("MSI GeForce RTX 3080 Ti SUPRIM X 12G");
-    $(By.id("doSearch")).click();
+    HotlineHomePage.openURL();
+    HotlineHomePage.performSearchAndClickResult("MSI GeForce RTX 3080 Ti SUPRIM X 12G");
+
     $$(".btn btn--orange").shouldHave(sizeLessThan(2));
     $(By.xpath("//a[text() = '\n" +
             "      MSI GeForce RTX 3080 Ti SUPRIM X 12G\n" +
