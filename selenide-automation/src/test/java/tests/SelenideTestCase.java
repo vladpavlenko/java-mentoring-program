@@ -1,23 +1,26 @@
 package tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import pages.BasePage;
+import pages.google.GoogleHomePage;
 import pages.hotline.HotlineHomePage;
+import pages.hotline.HotlineItemPage;
+import pages.hotline.HotlineSearchPage;
 import pages.rozetka.RozetkaHomePage;
 import pages.rozetka.RozetkaSearchPage;
+import pages.steam.SteamAgeRestrictionPage;
+import pages.steam.SteamHomePage;
+import pages.steam.SteamItemPage;
 import steps.SearchSteps;
 
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.Random;
 
-import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.CollectionCondition.sizeLessThan;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -39,35 +42,28 @@ public class SelenideTestCase extends BaseTest{
   public void hotlineTest() {
     HotlineHomePage.openURL();
     HotlineHomePage.performSearchAndClickResult("MSI GeForce RTX 3080 Ti SUPRIM X 12G");
-
-    $$(".btn btn--orange").shouldHave(sizeLessThan(2));
-    $(By.xpath("//a[text() = '\n" +
-            "      MSI GeForce RTX 3080 Ti SUPRIM X 12G\n" +
-            "    ']")).click();
-    SelenideElement totalTitles = $(".many > div");
-    totalTitles.should(appear);
-    String[] numberOfTitles = totalTitles.getText().trim().split(": ");
-    $$(By.xpath("//a[contains(text(), 'Купити')]")).filterBy(Condition.visible).shouldHave(size(Integer.parseInt(numberOfTitles[1])));
+    HotlineSearchPage.verifyOnlyOneResultReturned();
+    HotlineSearchPage.clickOnTheItem();
+    HotlineItemPage.verifyNumberOfBuyButtons();
   }
 
   @Test
   @Story("Search Steam for Resident evil")
   @Description("Verify age restriction validation")
   public void steamTest() {
-    open("https://store.steampowered.com/");
-    $(By.id("store_nav_search_term")).setValue("resident evil");
-    $("div#search_suggestion_contents > a").should(appear).click();
-    $(By.id("ageYear")).selectOptionByValue("1992");
-    $(By.id("view_product_page_btn")).click();
-    $(By.id("appHubAppName")).shouldHave(Condition.text("Resident Evil Village"));
+    SteamHomePage.openURL();
+    SteamHomePage.performSearchAndFirstItem("resident evil");
+    SteamAgeRestrictionPage.selectYearOfBorn("1992");
+    SteamAgeRestrictionPage.clickOnViewProductButton();
+    SteamItemPage.verifyTitle("Resident Evil Village");
   }
 
   @Test
   @Story("Simple Google search")
   @Description("Happy Path test of search")
   public void googleTest() {
-    open("https://google.com/");
-    SearchSteps.searchForElementAndClick("epam", "Epam");
+    GoogleHomePage.openURL();
+    GoogleHomePage.performSearchAndClickResult("epam", "Epam");
   }
 
   @Test
