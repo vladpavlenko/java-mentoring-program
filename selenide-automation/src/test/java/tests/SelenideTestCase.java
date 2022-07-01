@@ -8,11 +8,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import pages.google.GoogleHomePage;
+import pages.helpukraine.HelpUkraineHomePage;
 import pages.hotline.HotlineHomePage;
 import pages.hotline.HotlineItemPage;
 import pages.hotline.HotlineSearchPage;
 import pages.rozetka.RozetkaHomePage;
 import pages.rozetka.RozetkaSearchPage;
+import pages.skyup.SkyUpDeparturePage;
+import pages.skyup.SkyUpDirectionsPage;
+import pages.skyup.SkyUpHomePage;
+import pages.skyup.SkyUpLandingPage;
 import pages.steam.SteamAgeRestrictionPage;
 import pages.steam.SteamHomePage;
 import pages.steam.SteamItemPage;
@@ -70,9 +75,8 @@ public class SelenideTestCase extends BaseTest{
   @Story("Stand with Ukraine")
   @Description("Stand with Ukraine")
   public void standWithUkraine() {
-    open("https://helpukraine.center/");
-    //take screenshot at any given moment
-    screenshot("standWithUkraineScreen" + new Random().nextInt(999));
+    HelpUkraineHomePage.openURL();
+    takeScreenshot("HelpUkraineScreenshot");
     Assert.assertEquals("Help Ukraine Center", title());
   }
 
@@ -80,20 +84,20 @@ public class SelenideTestCase extends BaseTest{
   @Story("Order tickets on SkyUp site")
   @Description("Order tickets on SkyUp site")
   public void skyUpTest() {
-    open("https://skyup.aero/uk/");
-    $(By.xpath("//*[@id='open-appeal-modal']/div/div[2]/button")).shouldBe(Condition.visible).click();
-    $(By.xpath("//button[contains(text(), 'Погодитися')]")).click();
-    $(By.id("headerTriggerDropdownPassengers")).click();
-    $(By.xpath("//*[@id='headerDropdownPassengers']/li[4]/a/span")).should(appear).click();
-    $(By.xpath("//div[contains(text(), 'Грузія')]")).should(appear).click();
-    $(By.xpath("//input[@id='arrivalCityName']//parent::div")).click();
-    $(By.xpath("//span[contains(text(), 'Афіни')]")).should(appear).click();
-    $(By.id("forwardDateItem")).click();
-    $$(By.xpath("//div[@class='day toMonth valid tooltip-trigger']")).filterBy(enabled).first().should(appear).click();
-    $(By.xpath("//button[contains(text(), 'Пошук квитків')][not(@id='searchBtn')]")).should(appear).click();
-    $(By.xpath("//div[text()='Вибрати']")).shouldBe(visible).click();
-    $(By.xpath("//*[@id='forwardEconomModal']/div/div[2]/div/div/div[1]/div[2]/button/span[1]")).should(appear).click();
-    $(By.id("progressNextBtn")).should(appear).click();
+    SkyUpHomePage.openURL();
+    SkyUpHomePage.closeModalWindow();
+    SkyUpHomePage.clickAgreeButton();
+    SkyUpHomePage.openPassengersDropdown();
+    SkyUpHomePage.selectFlightsOption();
+    SkyUpDirectionsPage.chooseCountryFromList();
+    SkyUpLandingPage.clickArrivalCityField();
+    SkyUpLandingPage.selectAthensCityOption();
+    SkyUpLandingPage.openForwardDateDatePicker();
+    SkyUpLandingPage.selectFirstAvailableDateFromThePage();
+    SkyUpLandingPage.clickSearchButton();
+    SkyUpDeparturePage.clickSelectButton();
+    SkyUpDeparturePage.selectEconomOption();
+    SkyUpDeparturePage.clickNextButton();
     //I don't want to enter my personal info :)
   }
 }

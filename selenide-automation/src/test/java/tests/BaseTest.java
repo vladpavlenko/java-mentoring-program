@@ -5,10 +5,14 @@ import com.codeborne.selenide.impl.Waiter;
 import com.codeborne.selenide.junit.ScreenShooter;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 
+import java.util.Random;
 import java.util.logging.Logger;
+
+import static com.codeborne.selenide.Selenide.screenshot;
 
 public class BaseTest {
   /**
@@ -30,5 +34,10 @@ public class BaseTest {
     Configuration.browser = "chrome";
     Configuration.browserSize = "1920x1080";
     SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+  }
+
+  //take screenshot at any given moment
+  public void takeScreenshot(String screenName) {
+    screenshot(screenName + new Random().nextInt(999));
   }
 }
