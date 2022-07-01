@@ -1,6 +1,5 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -21,12 +20,7 @@ import pages.skyup.SkyUpLandingPage;
 import pages.steam.SteamAgeRestrictionPage;
 import pages.steam.SteamHomePage;
 import pages.steam.SteamItemPage;
-import steps.SearchSteps;
 
-import java.lang.management.GarbageCollectorMXBean;
-import java.util.Random;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 @Feature("Selenide automation mentoring")
